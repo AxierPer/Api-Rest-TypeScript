@@ -1,5 +1,5 @@
-import { db } from "..";
-import { type InsertUser, userTable } from "../schema";
+import { db } from "../../database";
+import { type InsertUser, userTable } from "../../database/schema";
 
 export async function createUser(data: InsertUser){
     await db.insert(userTable).values(data);

@@ -7,5 +7,5 @@ export const {
 } = process.env
 
 export const {
-    SECRET = "YOUR SECRET"
+    JWT_SECRET = "YOUR JWT_SECRET"
 } = process.env
