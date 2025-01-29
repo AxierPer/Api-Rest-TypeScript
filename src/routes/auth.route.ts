@@ -5,6 +5,7 @@ import { getUserByEmail } from "../database/queries/select.query";
 import { createUser } from "../database/queries/insert.query";
 import { hashingPassword, matchHashedPassword } from "../utils/hashing.utils";
 import type { InsertUser } from "../database/schema";
+import { jwtGenerate } from "../utils/jwt.util";
 
 export const authRouter = new Hono();
 
@@ -25,6 +26,10 @@ authRouter.post('/login', zValidator('json', loginSchema),async (c)=>{
     if (match != true){
         return c.json({ message: "Email or Password is invalid" }, 401)
     }
+
+    // Generate JWT Token
+    const token = await jwtGenerate(user.username, user.email, user.password)
+    console.log(token)
 
     return c.json({message: "Login"})
 });
